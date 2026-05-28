@@ -1,16 +1,24 @@
+from gmail_reader import get_unread_emails
 from email_processor import analyze_email
 
-sample_email = """
-Hi Aditya,
+emails = get_unread_emails()
 
-We would like to schedule your interview for next Tuesday at 3 PM.
+for i, email in enumerate(emails):
 
-Please confirm your availability.
+    print(f"\n========== EMAIL {i+1} ==========\n")
 
-Best,
-HR Team
-"""
+    email_content = f"""
+    Sender:
+    {email['from']}
 
-result = analyze_email(sample_email)
+    Subject:
+    {email['subject']}
 
-print(result)
+    Body:
+    {email['body']}
+    """
+
+    email_content = email_content[:5000]
+    result = analyze_email(email_content)
+
+    print(result)
